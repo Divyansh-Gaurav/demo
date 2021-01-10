@@ -9,7 +9,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String getUserName(String name) {
-		return "hello "+name+" from service layer!";
+		return "hello there"+name+" from service layer!";
 	}
 
 }
