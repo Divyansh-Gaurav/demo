@@ -11,9 +11,12 @@ import com.example.demo.models.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long>{
 
-	@Query("select u from User u where u.id=:id")
+	@Query("select u from User u where u.userId=:id")
 	 User findByUserId(Long id);
 	
 	@Query(value="select u.* from users u",nativeQuery = true)
 	List<User> findAll();
+
+	@Query("select u from User u where u.firstName=:firstName and u.lastName=:lastName")
+	User findByNames(String firstName, String lastName);
 }

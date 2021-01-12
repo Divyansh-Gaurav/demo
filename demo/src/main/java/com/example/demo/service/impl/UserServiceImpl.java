@@ -6,7 +6,9 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.models.File;
 import com.example.demo.models.User;
+import com.example.demo.repository.FileRepository;
 import com.example.demo.repository.UserRepo;
 import com.example.demo.service.UserService;
 
@@ -17,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepo repo;
+	
+	@Autowired
+	private FileRepository fileRepo;
 
 	@Override
 	public String getUserName(String name) {
@@ -38,6 +43,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAllUsers() {
 		return repo.findAll();
+	}
+
+	@Override
+	public File saveFile(User u, String fileType, byte[] fileData, String fileName) {
+		LOGGER.info("saving file with user");
+	return fileRepo.save(new File(fileName,fileData,fileType, u));	
+	}
+
+	@Override
+	public User findByNames(String firstName, String lastName) {
+	return repo.findByNames(firstName,lastName);
 	}
 
 }
